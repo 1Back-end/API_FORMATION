@@ -23,7 +23,6 @@ from app.main.core.i18n import add_process_language_header
 from app.main.core.security import decode_access_token
 from app.main.models.db.session import SessionLocal
 from app.main.schedulers import scheduler
-from app.main.models.licences import *
 
 
 security = HTTPBasic()
