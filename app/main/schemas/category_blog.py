@@ -23,3 +23,12 @@ class CategoryBlogUpdate(BaseModel):
 
 class CategoryBlogDelete(BaseModel):
     uuid: str
+
+
+class CategoryBlogResponse(BaseModel):
+    uuid: str
+    name: str
+    description: Optional[str]
+    created_at:datetime
+    updated_at: Optional[datetime]
+
