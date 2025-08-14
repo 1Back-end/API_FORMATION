@@ -35,8 +35,41 @@ class CRUDcategoryblog(CRUDBase[models.CategoryBlog,schemas.CategoryBlogCreate,s
 
     @classmethod
     def soft_delete(cls,db:Session,uuid:str):
-        db_obj = cls.get_by_uuid(db=db,uuid=uuid)
+        db_obj = cls.get_by_uuid(db=db,uuid=uuid) 
         if not db_obj:
             raise HTTPException(status_code=404,detail="categoryblog not find")
         db_obj.is_deleted=True
         db.commit()
+
+
+    @classmethod
+    def create(cls,db:Session, obj_in:schemas.CategoryBlogCreate):
+
+        db_obj = models.CategoryBlog(
+            uuid = str(uuid.uuid4()),
+            name = obj_in.name,
+            description = obj_in.description
+
+        )
+        db.add(db_obj)
+        db.commit()
+        db.refresh(db_obj)
+        return db_obj
+    
+
+
+
+    @classmethod
+    def update(cls,db:Session,obj_in:schemas.CategoryBlogUpdate):
+        db_obj = cls.get_by_uuid(db=db,uuid=obj_in.uuid) 
+        if not db_obj:
+            raise HTTPException(status_code=404,detail="CategoryBlog not found")
+        db_obj.name = obj_in.name if obj_in.name else db_obj.name
+        db_obj.description = obj_in.description if obj_in.description else db_obj.description
+        db.commit()
+        db.refresh(db_obj)
+        return db_obj
+    
+
+
+category_blog = CRUDcategoryblog(models.CategoryBlog)
