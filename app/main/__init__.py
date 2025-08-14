@@ -23,7 +23,6 @@ from app.main.core.i18n import add_process_language_header
 from app.main.core.security import decode_access_token
 from app.main.models.db.session import SessionLocal
 from app.main.schedulers import scheduler
-from app.main.models.licences import *
 
 
 security = HTTPBasic()
@@ -31,10 +30,11 @@ security = HTTPBasic()
 protocol = HTTPBearer(auto_error=False, scheme_name="Bearer")
 
 description = '''
-    This API is designed to manage the generation and validation of software licenses.
-    It provides secure endpoints for creating, activating, verifying, and revoking licenses.
-    Most operations require authenticated access to ensure security and proper usage.
+    Cette API permet la gestion complète des licences logicielles. 
+    Elle offre des points de terminaison sécurisés pour générer, activer, vérifier et révoquer des licences.
+    La plupart des opérations nécessitent une authentification afin de garantir la sécurité et une utilisation conforme.
 '''
+
 
 app = FastAPI(
     title=Config.PROJECT_NAME,

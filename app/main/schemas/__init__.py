@@ -6,3 +6,4 @@ from .user import *
 from .file import *
 from .adress import * 
 from .category_block import *
+from .category_blog import * 
