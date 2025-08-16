@@ -1,6 +1,21 @@
-from .backlist_token import *
-from .storage import *
-from .user import * 
-from .address import *
-from .category_blog import *
-from .blog import *
+from dataclasses import dataclass
+from sqlalchemy.sql import func
+from datetime import datetime
+from sqlalchemy.orm import relationship
+from sqlalchemy.dialects.postgresql.json import JSONB
+from sqlalchemy import Column, ForeignKey, Integer, String, Text, DateTime, Boolean
+from sqlalchemy import event
+from app.main.models.db.base_class import Base
+from enum import Enum
+
+
+class CategoryBlog(Base):
+
+    __tablename__="category_blog"
+
+    uuid=Column(String,primary_key=True,index=True)
+    name=Column(String,unique=True,nullable=False)
+    description=Column(Text,nullable=True)
+    is_deleted=Column(Boolean,default=False)
+    created_at = Column(DateTime, default=func.now())  # Account creation timestamp
+    updated_at = Column(DateTime, default=func.now(), onupdate=func.now())  # Last update timestamp
