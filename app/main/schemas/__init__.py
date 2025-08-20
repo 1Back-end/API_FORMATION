@@ -7,3 +7,6 @@ from .file import *
 from .adress import *
 from .category_blog import *
 from .product import *
+from .category_product import *
+from .unit_product import *
+

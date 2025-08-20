@@ -64,5 +64,6 @@ class CRUDcategoryblog(CRUDBase[models.CategoryBlog, schemas.CategoryBlogCreate,
         db.commit()
         db.refresh(db_obj)
         return db_obj
- 
+
+
 category_blog = CRUDcategoryblog(models.CategoryBlog)

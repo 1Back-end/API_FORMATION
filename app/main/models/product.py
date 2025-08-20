@@ -3,7 +3,7 @@ from sqlalchemy.sql import func
 from datetime import datetime
 from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql.json import JSONB
-from sqlalchemy import Column, ForeignKey, Integer, String, Text, DateTime, Boolean
+from sqlalchemy import Column, ForeignKey, Integer, String, Text, DateTime, Boolean,Float
 from sqlalchemy import event
 from app.main.models.db.base_class import Base
 from enum import Enum
@@ -16,8 +16,8 @@ class Product(Base):
     uuid = Column(String, primary_key=True, index=True)
     name = Column(String, unique=True, nullable=False)
     qty = Column(Integer, nullable=False, default="0")
-    pv = Column(float, nullable=False)
-    pa = Column(float, nullable=False)
+    pv = Column(Float, nullable=False)
+    pa = Column(Float, nullable=False)
     stock_seal = Column(Integer, nullable=False, default="0")
     is_active = Column(Boolean, default=True)
     is_deleted = Column(Boolean, default=False)
