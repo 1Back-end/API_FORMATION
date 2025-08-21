@@ -28,7 +28,7 @@ async def create_category_blog(
 async def update_category_blog(
     *,
     db: Session = Depends(get_db),
-    obj_in: schemas.CategoryBlogUpdate
+    obj_in: schemas.CategoryProductUpdate
 
 ):
     exist_name = crud.category_blog.get_by_name(db=db, name=obj_in.name)
