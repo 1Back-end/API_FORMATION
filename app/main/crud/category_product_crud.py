@@ -43,7 +43,7 @@ class CRUDcategoryProduct(CRUDBase[models.CategoryProduct, schemas.CategoryProdu
     @classmethod
     def create(cls, db: Session, obj_in: schemas.CategoryProductCreate):
         db_obj = models.CategoryProduct(
-            uuid=str(uuid.uuid4),
+            uuid=str(uuid.uuid4()),
             name=obj_in.name,
             description=obj_in.description,
 
@@ -60,7 +60,7 @@ class CRUDcategoryProduct(CRUDBase[models.CategoryProduct, schemas.CategoryProdu
             raise HTTPException(
                 status_code=404, detail="CategoryProduct NOT FOUND")
         db_obj.name = obj_in.name if obj_in.name else db_obj.name
-        db_obj.description = obj_in.description if obj_in.description else db.description
+        db_obj.description = obj_in.description if obj_in.description else db_obj.description
         db.commit()
         db.refresh(db_obj)
         return db_obj

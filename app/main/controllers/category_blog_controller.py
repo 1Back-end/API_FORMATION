@@ -56,3 +56,17 @@ async def soft_delete_category_blog(
 ):
     crud.category_blog.soft_delete(db=db,uuid=obj_in.uuid)
     return schemas.Msg(message=__(key="categoryblogs-deleted-successfully"))
+
+@router.get('/get_by_uuid',response_model=schemas.CategoryBlogResponse,status_code=200)
+
+async def get_category_blog_by_uuid(
+   *,
+   db:Session = Depends(get_db),
+   uuid:str
+):
+    obj_in = crud.category_blog.get_by_uuid(db=db,uuid=uuid)
+    if not obj_in:
+     raise HTTPException(status_code=404,detail="category-blog-not-found")
+    return obj_in
+
+  

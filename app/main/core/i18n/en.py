@@ -17,6 +17,7 @@ translation = {
     "user-created-successfully": "User created sucessfully",
     "user-deleted-successfully": "User deleted succesfully",
     "user-status-updated-successfully": "User status updated sucessfully",
+    "category-blog-not-found":"category Blog Not Found",
     
 
 

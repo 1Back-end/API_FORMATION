@@ -41,3 +41,4 @@ class ProductResponse(BaseModel):
     stock_seal: int
     created_at: datetime
     updated_at: Optional[datetime]
+    model_config = ConfigDict(from_attributes=True)

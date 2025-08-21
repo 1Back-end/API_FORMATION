@@ -18,7 +18,7 @@ class CRUDProduct(CRUDBase[models.Product,schemas.ProductCreate,schemas.ProductU
     
     @classmethod
     def get_by_name(cls,db:Session,name:str):
-        return db.query(models.Product).filter(models.product.name == name,models.Product.is_deleted==False).first()
+        return db.query(models.Product).filter(models.Product.name == name,models.Product.is_deleted==False).first()
     
     @classmethod
     def delete(cls, db: Session, uuid: str):
@@ -41,7 +41,7 @@ class CRUDProduct(CRUDBase[models.Product,schemas.ProductCreate,schemas.ProductU
     @classmethod
     def create(cls, db: Session, obj_in: schemas.ProductCreate):
         db_obj = models.Product(
-            uuid=str(uuid.uuid4),
+            uuid=str(uuid.uuid4()),
             name=obj_in.name,
             description=obj_in.description,
             pu = obj_in.pu,
@@ -60,10 +60,10 @@ class CRUDProduct(CRUDBase[models.Product,schemas.ProductCreate,schemas.ProductU
             raise HTTPException(
                 status_code=404, detail="PRODUCT NOT FOUND")
         db_obj.name = obj_in.name if obj_in.name else db_obj.name
-        db_obj.description = obj_in.description if obj_in.description else db.description
-        db_obj.qty = obj_in.qty if obj_in.qty else db.qty
-        db_obj.pa = obj_in.pa if obj_in.pa else db.pa
-        db_obj.pu = obj_in.pu if obj_in.pu else db.pu
+        db_obj.description = obj_in.description if obj_in.description else db_obj.description
+        db_obj.qty = obj_in.qty if obj_in.qty else db_obj.qty
+        db_obj.pa = obj_in.pa if obj_in.pa else db_obj.pa
+        db_obj.pu = obj_in.pu if obj_in.pu else db_obj.pu
         db.commit()
         db.refresh(db_obj)
         return db_obj
