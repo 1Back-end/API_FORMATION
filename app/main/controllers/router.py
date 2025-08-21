@@ -4,6 +4,8 @@ from .authentification_controller import router as authentication
 from .user_controller import router as user
 from .storage_controller import router as storage
 from .address_controller import router as address
+from .categoryblog_controller import router as category_blogs
+from .quin_four_controller import router as fournisseur
 api_router = APIRouter()
 
 api_router.include_router(migration)
@@ -11,3 +13,5 @@ api_router.include_router(authentication)
 api_router.include_router(user)
 api_router.include_router(storage)
 api_router.include_router(address)
+api_router.include_router(category_blogs)
+api_router.include_router(fournisseur)

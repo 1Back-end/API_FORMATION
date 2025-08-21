@@ -3,27 +3,25 @@ from pydantic import BaseModel, ConfigDict
 from datetime import datetime
 
 
-
-
 class QuinFou(BaseModel):
     frist_name:str
-    las_name:str
-    phone_number1:int
-    phone_number2:Optional[int]
+    last_name:str
+    phone_number1:str
+    phone_number2:Optional[str]
     country:str
     city:str
     
 
-class QuinFourCreate(QuinFour):
+class QuinFourCreate(QuinFou):
     pass 
 
 
 class QuinFourUpdate(BaseModel):
     uuid: str
-    frist_name: Optional[str]
-    las_name: Optional[str]
-    phone_number1: Optional[int]
-    phone_number2: Optional[int]
+    first_name: Optional[str]
+    last_name: Optional[str]
+    phone_number1: Optional[str]
+    phone_number2: Optional[str]
     country: Optional[str]
     city: Optional[str]
 
@@ -37,8 +35,9 @@ class QuinFourResponse(BaseModel):
     first_name: str
     last_name: str
     phone_number1: int
-    phone_number2: Optional[int]
+    phone_number2: Optional[str]
     country: Optional[str]
     city: Optional[str]
     created_at:datetime
     updated_at: Optional[datetime]
+    model_config = ConfigDict(from_attributes=True)

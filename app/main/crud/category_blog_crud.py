@@ -28,7 +28,7 @@ class CRUDcategoryblog(CRUDBase[models.CategoryBlog,schemas.CategoryBlogCreate,s
     def delete(cls,db:Session,uuid:str):
         db_obj = cls.get_by_uuid(db=db,uuid=uuid)
         if not db_obj:
-            raise HTTPException(status_code=404,detail="categoryblog not find")
+            raise HTTPException(status_code=404,detail=__(key="category-blog-not-found"))
         db.delete(db_obj)
         db.commit()
 

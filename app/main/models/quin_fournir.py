@@ -9,15 +9,15 @@ from app.main.models.db.base_class import Base
 from enum import Enum
 
 
-class quin_fouur(Base):
+class Fournisseur(Base):
 
-    __tablename__="quin_four"
+    __tablename__="fournisseurs"
 
     uuid=Column(String,primary_key=True,index=True)
-    first_name=Column(String,unique=True,nullable=False)
-    last_name=Column(String,unique=True,nullable=False)
-    phone_number1=Column(Integer,unique=True,nullable=False)
-    phone_number2=Column(Integer,unique=True,nullable=False)
+    first_name=Column(String,nullable=False)
+    last_name=Column(String,nullable=False)
+    phone_number1=Column(String,unique=True,nullable=False)
+    phone_number2=Column(String,unique=True,nullable=True)
     country=Column(String,unique=True,nullable=False)
     city=Column(String,unique=True,nullable=False)
     is_deleted=Column(Boolean,default=False)

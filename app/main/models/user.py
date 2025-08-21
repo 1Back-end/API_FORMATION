@@ -52,8 +52,7 @@ class User(Base):
     last_login_date = Column(DateTime, nullable=True, default=None)
     connexion_counter = Column(Integer, nullable=True, default=0)
 
-    organisations = relationship("Organisation", back_populates="owner", uselist=False)
-
+    
 
     def __repr__(self):
         return f"User('{self.first_name} {self.last_name}', '{self.email}')"
