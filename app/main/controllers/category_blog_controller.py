@@ -19,7 +19,7 @@ async def create_category_blog(
 ):
     exist_name = crud.category_blog.get_by_name(db=db, name=obj_in.name)
     if exist_name:
-        raise HTTPException(status_code=409, detail="This Name Already Exist")
+        raise HTTPException(status_code=409, detail="This-Name-Already-Exist")
     crud.category_blog.create(db=db, obj_in=obj_in)
     return schemas.Msg(message=__(key="categoryblogs-created-successfully"))
 
@@ -33,7 +33,7 @@ async def update_category_blog(
 ):
     exist_name = crud.category_blog.get_by_name(db=db, name=obj_in.name)
     if exist_name:
-        raise HTTPException(status_code=409, detail="This Name Already Exist")
+        raise HTTPException(status_code=409, detail="This-Name-Already-Exist")
     crud.category_blog.update(db=db, obj_in=obj_in)
     return schemas.Msg(message=__(key="categoryblogs-update-successfully"))
 

@@ -19,7 +19,7 @@ async def create_unit_prodeuct(
 ):
     exist_name = crud.unit_product.get_by_name(db=db, name=obj_in.name)
     if exist_name:
-        raise HTTPException(status_code=401, detail="This name already exist")
+        raise HTTPException(status_code=401, detail="This-name-already-exist")
     crud.unit_product.create(db=db, obj_in=obj_in)
     return schemas.Msg(message=__(key="unitproduct-create-successfully"))
 
@@ -32,7 +32,7 @@ async def update_unit_project(
 ):
     exist_name = crud.unit_product.get_by_name(db=db, name=obj_in.name)
     if exist_name:
-        raise HTTPException(status_code=401, detail="This name already exist")
+        raise HTTPException(status_code=401, detail="This-name-already-exist")
     crud.unit_product.update(db=db, obj_in=obj_in)
     return schemas.Msg(message=__(key="unitproduct-updated-successfully"))
 
@@ -55,4 +55,4 @@ async def soft_delete_unit_product(
 
 ):
     crud.unit_product.soft_delete(db=db, uuid=obj_in.uuid)
-    return schemas.Msg(message=__(key="unitproduct-deleted successfully"))
+    return schemas.Msg(message=__(key="unitproduct-deleted-successfully"))

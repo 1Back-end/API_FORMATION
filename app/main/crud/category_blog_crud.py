@@ -27,7 +27,7 @@ class CRUDcategoryblog(CRUDBase[models.CategoryBlog, schemas.CategoryBlogCreate,
         db_obj = cls.get_by_uuid(db=db, uuid=uuid)
         if not db_obj:
             raise HTTPException(
-                status_code=404, detail=__(key="category-blog-not-found"))
+                status_code=404, detail=__(key="categoryBlog-Not-Found"))
         db.delete(db_obj)
         db.commit()
 
@@ -36,7 +36,7 @@ class CRUDcategoryblog(CRUDBase[models.CategoryBlog, schemas.CategoryBlogCreate,
         db_obj = cls.get_by_uuid(db=db, uuid=uuid)
         if not db_obj:
             raise HTTPException(
-                status_code=404, detail="categoryblog not find")
+                status_code=404, detail="categoryblog-Not-found")
         db_obj.is_deleted = True
         db.commit()
 
@@ -58,7 +58,7 @@ class CRUDcategoryblog(CRUDBase[models.CategoryBlog, schemas.CategoryBlogCreate,
         db_obj = cls.get_by_uuid(db=db, uuid=obj_in.uuid)
         if not db_obj:
             raise HTTPException(
-                status_code=404, detail="CategoryBlog NOT FOUND")
+                status_code=404, detail="CategoryBlog-Not-Found")
         db_obj.name = obj_in.name if obj_in.name else db_obj.name
         db_obj.description = obj_in.description if obj_in.description else db.description
         db.commit()

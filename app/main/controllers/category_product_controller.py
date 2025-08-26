@@ -20,7 +20,7 @@ async def create_category_product(
 
     exist_name = crud.category_product.get_by_name(db=db, name=obj_in.name)
     if exist_name:
-        raise HTTPException(status_code=409, detail="This Name Already Exist")
+        raise HTTPException(status_code=409, detail="This-Name-Already-Exist")
     crud.category_product.create(db=db, obj_in=obj_in)
     return schemas.Msg(message=__(key="categoryproduct-created-successfully"))
 
@@ -34,7 +34,7 @@ async def update_category_product(
 
     exist_name = crud.category_product.get_by_name(db=db, name=obj_in.name)
     if exist_name:
-        raise HTTPException(status_code=409, detail="This Name Already Exist")
+        raise HTTPException(status_code=409, detail="This-Name-Already-Exist")
     crud.category_product.update(db=db, obj_in=obj_in)
     return schemas.Msg(message=__(key="categoryproduct-update-successfully"))
 

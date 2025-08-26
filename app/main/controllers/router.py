@@ -7,7 +7,7 @@ from .address_controller import router as address
 from .category_blog_controller import router as category_blog
 from .category_product_controller import router as category_product
 from .unit_product_controller import router as unit_product
-
+from .blog_controller import router as blog 
 api_router = APIRouter()
 
 api_router.include_router(migration)
@@ -18,3 +18,4 @@ api_router.include_router(address)
 api_router.include_router(category_blog)
 api_router.include_router(category_product)
 api_router.include_router(unit_product)
+api_router.include_router(blog)
