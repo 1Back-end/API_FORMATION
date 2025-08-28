@@ -23,10 +23,14 @@ class Product(Base):
     is_deleted = Column(Boolean, default=False)
     description = Column(String, nullable=True)
     #foreignkey
-    category_uuid = Column(String, ForeignKey( "category_product.uuid"), nullable=False) # foreign key
-    category = relationship("CategoryProduct", backref="products")
-    unit_uuid = Column(String,ForeignKey("unit_product.uuid"),nullable=False)
-    unit = relationship("UnitProduct",backref="products")
+    category_product_uuid = Column(String, ForeignKey("category_product.uuid"), nullable=False) # foreign key
+    category = relationship("CategoryProduct",foreign_keys=[category_product_uuid], backref="products")
+    
+    unit_product_uuid = Column(String,ForeignKey("unit_product.uuid"),nullable=False)
+    unit = relationship("UnitProduct",foreign_keys=[unit_product_uuid],backref="products")
+    
+    added_by = Column(String,ForeignKey("users.uuid"),nullable=False,index=True)
+    creator = relationship("User",foreign_keys=[added_by],backref="products")
     # Account creation timestamp
     created_at = Column(DateTime, default=func.now())
     updated_at = Column(DateTime, default=func.now(),

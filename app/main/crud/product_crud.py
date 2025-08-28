@@ -10,16 +10,17 @@ from sqlalchemy.orm import Session
 from app.main.crud.base import CRUDBase
 from app.main import models, schemas
 
-class CRUDProduct(CRUDBase[models.Product,schemas.ProductCreate,schemas.ProductUpdate]):
-    
+
+class CRUDProduct(CRUDBase[models.Product, schemas.ProductCreate, schemas.ProductUpdate]):
+
     @classmethod
-    def get_by_uuid(cls,db:Session,uuid:str):
-        return db.query(models.Product).filter(models.Product.uuid==uuid,models.Product.is_deleted==False).first()
-    
+    def get_by_uuid(cls, db: Session, uuid: str):
+        return db.query(models.Product).filter(models.Product.uuid == uuid, models.Product.is_deleted == False).first()
+
     @classmethod
-    def get_by_name(cls,db:Session,name:str):
-        return db.query(models.Product).filter(models.Product.name == name,models.Product.is_deleted==False).first()
-    
+    def get_by_name(cls, db: Session, name: str):
+        return db.query(models.Product).filter(models.Product.name == name, models.Product.is_deleted == False).first()
+
     @classmethod
     def delete(cls, db: Session, uuid: str):
         db_obj = cls.get_by_uuid(db=db, uuid=uuid)
@@ -39,14 +40,17 @@ class CRUDProduct(CRUDBase[models.Product,schemas.ProductCreate,schemas.ProductU
         db.commit()
 
     @classmethod
-    def create(cls, db: Session, obj_in: schemas.ProductCreate):
+    def create(cls, db: Session, obj_in: schemas.ProductCreate, added_by: str):
         db_obj = models.Product(
             uuid=str(uuid.uuid4()),
             name=obj_in.name,
             description=obj_in.description,
-            pu = obj_in.pu,
-            pa = obj_in.pa,
-            qty = obj_in.qty
+            pu=obj_in.pu,
+            pa=obj_in.pa,
+            qty=obj_in.qty,
+            category_product_uuid=obj_in.category_product_uuid,
+            unit_product_uuid=obj_in.unit_product_uuid,
+            added_by=added_by
         )
         db.add(db_obj)
         db.commit()
@@ -54,7 +58,7 @@ class CRUDProduct(CRUDBase[models.Product,schemas.ProductCreate,schemas.ProductU
         return db_obj
 
     @classmethod
-    def update(cls, db: Session, obj_in: schemas.ProductUpdate):
+    def update(cls, db: Session, obj_in: schemas.ProductUpdate, added_by: str):
         db_obj = cls.get_by_uuid(db=db, uuid=obj_in.uuid)
         if not db_obj:
             raise HTTPException(
@@ -64,9 +68,10 @@ class CRUDProduct(CRUDBase[models.Product,schemas.ProductCreate,schemas.ProductU
         db_obj.qty = obj_in.qty if obj_in.qty else db_obj.qty
         db_obj.pa = obj_in.pa if obj_in.pa else db_obj.pa
         db_obj.pu = obj_in.pu if obj_in.pu else db_obj.pu
+        db_obj.unit_product_uuid = obj_in.unit_product_uuid if obj_in.unit_product_uuid else db_obj.unit_product_uuid
+        db_obj.category_product_uuid = obj_in.category_product_uuid if obj_in.category_product_uuid else db_obj.category_product_uuid
         db.commit()
         db.refresh(db_obj)
         return db_obj
 
-product= CRUDProduct(models.product)
-        
+product = CRUDProduct(models.product)

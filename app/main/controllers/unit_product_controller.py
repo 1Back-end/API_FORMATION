@@ -19,9 +19,9 @@ async def create_unit_prodeuct(
 ):
     exist_name = crud.unit_product.get_by_name(db=db, name=obj_in.name)
     if exist_name:
-        raise HTTPException(status_code=401, detail="This-name-already-exist")
+        raise HTTPException(status_code=401, detail="this-name-already-exist")
     crud.unit_product.create(db=db, obj_in=obj_in)
-    return schemas.Msg(message=__(key="unitproduct-create-successfully"))
+    return schemas.Msg(message=__(key="unit-product-create-successfully"))
 
 
 @router.put('/update', response_model=schemas.Msg, status_code=200)
@@ -32,9 +32,9 @@ async def update_unit_project(
 ):
     exist_name = crud.unit_product.get_by_name(db=db, name=obj_in.name)
     if exist_name:
-        raise HTTPException(status_code=401, detail="This-name-already-exist")
+        raise HTTPException(status_code=401, detail="this-name-already-exist")
     crud.unit_product.update(db=db, obj_in=obj_in)
-    return schemas.Msg(message=__(key="unitproduct-updated-successfully"))
+    return schemas.Msg(message=__(key="unit-product-updated-successfully"))
 
 
 @router.delete('/delete', response_model=schemas.Msg, status_code=200)
@@ -44,7 +44,7 @@ async def delete_unit_product(
     obj_in: schemas.UnitProductDelete
 ):
     crud.unit_product.delete(db=db, uuid=obj_in.uuid)
-    return schemas.Msg(message=__(key="unitproduct-deleted-successfully"))
+    return schemas.Msg(message=__(key="unitp-roduct-deleted-successfully"))
 
 
 @router.put('/soft-delete', response_model=schemas.Msg, status_code=200)

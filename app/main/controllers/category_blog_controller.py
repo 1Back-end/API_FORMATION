@@ -19,9 +19,9 @@ async def create_category_blog(
 ):
     exist_name = crud.category_blog.get_by_name(db=db, name=obj_in.name)
     if exist_name:
-        raise HTTPException(status_code=409, detail="This-Name-Already-Exist")
+        raise HTTPException(status_code=409, detail="this-name-already-exist")
     crud.category_blog.create(db=db, obj_in=obj_in)
-    return schemas.Msg(message=__(key="categoryblogs-created-successfully"))
+    return schemas.Msg(message=__(key="category-blogs-created-successfully"))
 
 
 @router.put('/update', response_model=schemas.Msg, status_code=200)
@@ -33,9 +33,9 @@ async def update_category_blog(
 ):
     exist_name = crud.category_blog.get_by_name(db=db, name=obj_in.name)
     if exist_name:
-        raise HTTPException(status_code=409, detail="This-Name-Already-Exist")
+        raise HTTPException(status_code=409, detail="this-name-already-Exist")
     crud.category_blog.update(db=db, obj_in=obj_in)
-    return schemas.Msg(message=__(key="categoryblogs-update-successfully"))
+    return schemas.Msg(message=__(key="category-blogs-update-successfully"))
 
 @router.delete('/delete',response_model=schemas.Msg,status_code=200)
 async def delete_category_blog(
@@ -45,7 +45,7 @@ async def delete_category_blog(
     
 ):
     crud.category_blog.delete(db=db,uuid=obj_in.uuid)
-    return schemas.Msg(message=__(key="categoryblogs-deleted-successfully"))
+    return schemas.Msg(message=__(key="category-blogs-deleted-successfully"))
 
 @router.put('/soft_delete',response_model=schemas.Msg,status_code=200)
 async def soft_delete_category_blog(
@@ -64,7 +64,7 @@ async def get_category_blog_by_uuid(
    db:Session = Depends(get_db),
    uuid:str
 ):
-    obj_in = crud.category_blog.get_by_uuid(db=db,uuid=uuid)
+    obj_in = crud.category_blog_crud.get_by_uuid(db=db,uuid=uuid)
     if not obj_in:
      raise HTTPException(status_code=404,detail="category-blog-not-found")
     return obj_in

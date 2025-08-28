@@ -28,4 +28,11 @@ class CategoryProductResponse(BaseModel):
     description: Optional[str]
     created_at: datetime
     updated_at: Optional[datetime]
+    
+
+class CategoryProductSlim(BaseModel):
+    uuid:str
+    name:str 
     model_config = ConfigDict(from_attributes=True)
+    
+    

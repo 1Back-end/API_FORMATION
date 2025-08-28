@@ -17,9 +17,9 @@ async def create_blog(
 ):
     exist_name = crud.blog.get_by_name(db=db,name=obj_in.name)
     if exist_name:
-        raise HTTPException(status_code=409,detail="Blog-Already-Exist")
+        raise HTTPException(status_code=409,detail="blog-already-exist")
     crud.blog.create(db=db,obj_in=obj_in)
-    return schemas.Msg(message=__(key="Blogs-Created-Successfully"))
+    return schemas.Msg(message=__(key="blog-created-successfully"))
 
 @router.put("update",response_model=schemas.Msg,status_code=200)
 async def update_blog(
@@ -29,7 +29,7 @@ async def update_blog(
 ):
     exist_name = crud.blog.get_by_name(db=db,name=obj_in.name)
     if exist_name:
-      raise HTTPException(status_code=409,detail="Blog-Already-exist")
+      raise HTTPException(status_code=409,detail="blog-already-exist")
     crud.blog.create(db=db,obj_in=obj_in)
     return schemas.Msg(message=__(key="blog-create-successfully"))
 
@@ -42,7 +42,7 @@ async def delete_blog(
     
 ):
     crud.blog.delete(db=db,uuid=obj_in.uuid)
-    return schemas.Msg(message=__(key="blogs-deleted-successfully"))
+    return schemas.Msg(message=__(key="blog-deleted-successfully"))
 
 @router.put('/soft_delete',response_model=schemas.Msg,status_code=200)
 async def soft_delete_blog(
@@ -52,7 +52,7 @@ async def soft_delete_blog(
     
 ):
     crud.blog.soft_delete(db=db,uuid=obj_in.uuid)
-    return schemas.Msg(message=__(key="blogs-deleted-successfully"))
+    return schemas.Msg(message=__(key="blog-deleted-successfully"))
 
 @router.get('/get_by_uuid',response_model=schemas.BlogResponse,status_code=200)
 async def get_blog_by_uuid(
