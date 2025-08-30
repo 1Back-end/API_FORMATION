@@ -98,3 +98,31 @@ def send_start_reset_password(email_to: str, name: str, code: str) -> None:
     except Exception as e:
         logging.error(f"❌ Erreur lors de l'envoi de l'email : {e}")
 
+def send_account_confirmation_email(email_to: str, first_name: str, last_name: str) -> None:
+    try:
+        # Load the HTML template
+        template_path = Path(Config.EMAIL_TEMPLATES_DIR) / "account_confirmation.html"
+        html_content = Template(template_path.read_text(encoding="utf-8")).render(
+            first_name=first_name,
+            last_name=last_name,
+            project_name=Config.PROJECT_NAME
+        )
+
+        # Create the email
+        msg = MIMEMultipart()
+        msg["From"] = f"{Config.EMAILS_FROM_NAME} <{Config.EMAILS_FROM_EMAIL}>"
+        msg["To"] = email_to
+        msg["Subject"] = f"{Config.EMAILS_FROM_NAME} | Account Confirmation"
+        msg.attach(MIMEText(html_content, "html"))
+
+        # Connect and send
+        with smtplib.SMTP(Config.SMTP_HOST, Config.SMTP_PORT) as server:
+            if Config.SMTP_TLS:
+                server.starttls()
+            server.login(Config.SMTP_USER, Config.SMTP_PASSWORD)
+            server.send_message(msg)
+
+        logging.info(f"✅ Confirmation email sent to {email_to}")
+
+    except Exception as e:
+        logging.error(f"❌ Error sending confirmation email: {e}")

@@ -3,39 +3,35 @@ from pydantic import BaseModel, ConfigDict
 from datetime import datetime
 
 
+class UnitProduct(BaseModel):
+    name: str
+    description: Optional[str]
 
 
-class CategoryBlog(BaseModel):
-    name:str
-    description :Optional[str]
-  
+class UnitProductCreate(UnitProduct):
+    pass
 
 
-class CategoryBlogCreate(CategoryBlog):
-    pass 
-
-
-class CategoryBlogUpdate(BaseModel):
+class UnitProductUpdate(BaseModel):
     uuid: str
     name: Optional[str]
     description: Optional[str]
-    
 
-class CategoryBlogDelete(BaseModel):
+
+class UnitProductDelete(BaseModel):
     uuid: str
 
 
-class CategoryBlogResponse(BaseModel):
+class UnitProductResponse(BaseModel):
     uuid: str
     name: str
     description: Optional[str]
-    created_at:datetime
+    created_at: datetime
     updated_at: Optional[datetime]
     model_config = ConfigDict(from_attributes=True)
 
 
-class CategoryBlogSlim(BaseModel):
+class UnitProductSlim(BaseModel):
     uuid: str
     name: str
     model_config = ConfigDict(from_attributes=True)
-
