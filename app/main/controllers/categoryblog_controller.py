@@ -31,9 +31,7 @@ async def update_category_blogs(
     obj_in:schemas.CategoryBlogUpdate
 
 ):
-    exist_name=crud.category_blog.get_by_name(db=db,name=obj_in.name)
-    if exist_name:
-        raise HTTPException(status_code=409,detail="this name already exist")
+    
     crud.category_blog.update(db=db, obj_in=obj_in)
     return schemas.Msg(message=__(key="categoryblogs-update-successfully"))
 

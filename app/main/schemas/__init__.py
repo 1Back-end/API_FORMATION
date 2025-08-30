@@ -9,3 +9,8 @@ from .category_blog import *
 from .product import *
 from .product import *
 from .quin_four import *
+from .blog import *
+from .vehicle_brand import *
+from .vehicle_fuel import *
+from .vehicle import *
+

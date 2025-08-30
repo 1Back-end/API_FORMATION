@@ -12,7 +12,7 @@ from app.main import models,schemas
 
 
 
-class CRUDcategoryblog(CRUDBase[models.CategoryBlog,schemas.CategoryBlogCreate,schemas.CategoryBlogUpdate]):
+class CrudCategoryBlog(CRUDBase[models.CategoryBlog,schemas.CategoryBlogCreate,schemas.CategoryBlogUpdate]):
 
 
     @classmethod
@@ -41,7 +41,7 @@ class CRUDcategoryblog(CRUDBase[models.CategoryBlog,schemas.CategoryBlogCreate,s
         db_obj.is_deleted=True
         db.commit()
 
-
+  
     @classmethod
     def create(cls,db:Session, obj_in:schemas.CategoryBlogCreate):
 
@@ -72,4 +72,4 @@ class CRUDcategoryblog(CRUDBase[models.CategoryBlog,schemas.CategoryBlogCreate,s
     
 
 
-category_blog = CRUDcategoryblog(models.CategoryBlog)
+category_blog = CrudCategoryBlog(models.CategoryBlog)

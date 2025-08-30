@@ -5,3 +5,8 @@ from .address import *
 from .category_blog import *
 from .product import *
 from .quin_fournir import *
+from .quin_fournir import *
+from .blog import *
+from .vehicle_brand import *
+from .vehicle_fuel import *
+from .vehicle import *
