@@ -17,10 +17,6 @@ async def create_category_product(
     db: Session = Depends(get_db),
     obj_in: schemas.CategoryProductCreate,
 ):
-
-    exist_name = crud.category_product.get_by_name(db=db, name=obj_in.name)
-    if exist_name:
-        raise HTTPException(status_code=409, detail="this-name-already-exist")
     crud.category_product.create(db=db, obj_in=obj_in)
     return schemas.Msg(message=__(key="category-product-created-successfully"))
 
@@ -58,14 +54,15 @@ async def soft_category_product_delete(
     crud.category_product.soft_delete(db=db, uuid=obj_in.uuid)
     return schemas.Msg(message=__(key="category-product-deleted-successfully"))
 
-@router.get('/get_by_uuid',response_model=schemas.CategoryBlogResponse,status_code=200)
-async def get_category_product_by_uuid(
-   *,
-   db:Session = Depends(get_db),
-   uuid:str
-):
-    obj_in = crud.category_product_crud.get_by_uuid(db=db,uuid=uuid)
-    if not obj_in:
-     raise HTTPException(status_code=404,detail="category-product-not-found")
-    return obj_in
 
+@router.get('/get_by_uuid', response_model=schemas.CategoryProductResponse, status_code=200)
+async def get_category_product_by_uuid(
+    *,
+    db: Session = Depends(get_db),
+    uuid: str
+):
+    obj_in = crud.category_product.get_by_uuid(db=db, uuid=uuid)
+    if not obj_in:
+        raise HTTPException(
+            status_code=404, detail="category-product-not-found")
+    return obj_in

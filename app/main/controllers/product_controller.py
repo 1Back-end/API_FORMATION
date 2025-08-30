@@ -16,8 +16,7 @@ async def create_product(
     *,
     db: Session = Depends(get_db),
     obj_in: schemas.ProductCreate,
-    current_user: models.User = Depends(
-        TokenRequired(roles=["SUPER_ADMIN", "ADMIN"]))
+    current_user: models.User = Depends(TokenRequired(roles=["SUPER_ADMIN", "ADMIN"]))
 
 ):
     exist_name = crud.product.get_by_name(db=db, name=obj_in.name)
@@ -96,8 +95,7 @@ async def soft_product_delete(
 ):
     crud.category_product.soft_delete(
         db=db,
-        uuid=obj_in.uuid,
-        added_by=current_user.uuid
+        uuid=obj_in.uuid
     )
     return schemas.Msg(message=__(key="product-deleted-successfully"))
 
@@ -111,10 +109,9 @@ async def get_product_by_uuid(
         TokenRequired(roles=["SUPER_ADMIN", "ADMIN"]))
 
 ):
-    obj_in = crud.product_crud.get_by_uuid(
+    obj_in = crud.product.get_by_uuid(
         db=db,
         uuid=uuid,
-        added_by=current_user.uuid
     )
     if not obj_in:
         raise HTTPException(status_code=404, detail="product-not-found")

@@ -43,7 +43,7 @@ class CRUDcategoryblog(CRUDBase[models.CategoryBlog, schemas.CategoryBlogCreate,
     @classmethod
     def create(cls, db: Session, obj_in: schemas.CategoryBlogCreate):
         db_obj = models.CategoryBlog(
-            uuid=str(uuid.uuid4),
+            uuid=str(uuid.uuid4()),
             name=obj_in.name,
             description=obj_in.description,
 

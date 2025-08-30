@@ -27,7 +27,7 @@ class CRUDunitProduct(CRUDBase[models.UnitProduct, schemas.UnitProductCreate, sc
         db_obj = cls.get_by_uuid(db=db, uuid=uuid)
         if not db_obj:
             raise HTTPException(
-                status_code=404, detail="UnitProduct-Not-Found")
+                status_code=404, detail="unit-product-not-found")
         db.delete(db_obj)
         db.commit()
 
@@ -36,14 +36,14 @@ class CRUDunitProduct(CRUDBase[models.UnitProduct, schemas.UnitProductCreate, sc
         db_obj = cls.get_by_uuid(db=db, uuid=uuid)
         if not db_obj:
             raise HTTPException(
-                status_code=404, detail="UnitProduct-Not-Found")
+                status_code=404, detail="unit-product-not-found")
         db_obj.is_deleted = True
         db.commit()
 
     @classmethod
-    def create(cls, db: Session, obj_in: schemas.CategoryProductCreate):
+    def create(cls, db: Session, obj_in: schemas.UnitProductCreate):
         db_obj = models.UnitProduct(
-            uuid=str(uuid.uuid4),
+            uuid=str(uuid.uuid4()),
             name=obj_in.name,
             description=obj_in.description,
 
@@ -58,7 +58,7 @@ class CRUDunitProduct(CRUDBase[models.UnitProduct, schemas.UnitProductCreate, sc
         db_obj = cls.get_by_uuid(db=db, uuid=obj_in.uuid)
         if not db_obj:
             raise HTTPException(
-                status_code=404, detail="UnitProduct-Not-Found")
+                status_code=404, detail="unit-product-not-Found")
         db_obj.name = obj_in.name if obj_in.name else db_obj.name
         db_obj.description = obj_in.description if obj_in.description else db.description
         db.commit()

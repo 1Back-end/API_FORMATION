@@ -45,7 +45,7 @@ class CRUDProduct(CRUDBase[models.Product, schemas.ProductCreate, schemas.Produc
             uuid=str(uuid.uuid4()),
             name=obj_in.name,
             description=obj_in.description,
-            pu=obj_in.pu,
+            pv=obj_in.pv,
             pa=obj_in.pa,
             qty=obj_in.qty,
             category_product_uuid=obj_in.category_product_uuid,
@@ -67,11 +67,14 @@ class CRUDProduct(CRUDBase[models.Product, schemas.ProductCreate, schemas.Produc
         db_obj.description = obj_in.description if obj_in.description else db_obj.description
         db_obj.qty = obj_in.qty if obj_in.qty else db_obj.qty
         db_obj.pa = obj_in.pa if obj_in.pa else db_obj.pa
-        db_obj.pu = obj_in.pu if obj_in.pu else db_obj.pu
+        db_obj.pv = obj_in.pv if obj_in.pv else db_obj.pv
         db_obj.unit_product_uuid = obj_in.unit_product_uuid if obj_in.unit_product_uuid else db_obj.unit_product_uuid
         db_obj.category_product_uuid = obj_in.category_product_uuid if obj_in.category_product_uuid else db_obj.category_product_uuid
         db.commit()
         db.refresh(db_obj)
         return db_obj
+    
+    
+   
 
-product = CRUDProduct(models.product)
+product = CRUDProduct(models.Product)

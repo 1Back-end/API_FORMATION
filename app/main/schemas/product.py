@@ -10,7 +10,7 @@ class Product(BaseModel):
     name: str
     qty: int
     description: str
-    pu: float
+    pv: float
     pa: float
     stock_seal: int
     category_product_uuid:str
@@ -27,7 +27,7 @@ class ProductUpdate(BaseModel):
     price: Optional[int]
     qty: Optional[int]
     description: Optional[str]
-    pu: Optional[float]
+    pv: Optional[float]
     pa: Optional[float]
     unit_product_uuid:Optional[str]
     category_product_uuid:Optional[str]    
@@ -43,11 +43,19 @@ class ProductResponse(BaseModel):
     qty: int
     price: float
     description: str
-    pu: float
+    pv: float
     pa: float
     stock_seal: int
     created_at: datetime
     updated_at: Optional[datetime]
     category:CategoryProductSlim
     unit:UnitProductSlim
+    model_config = ConfigDict(from_attributes=True)
+
+class ProductResponseList(BaseModel):
+    total :int
+    per_page: int
+    pages:int
+    current_page:int
+    data:list[ProductResponse]
     model_config = ConfigDict(from_attributes=True)

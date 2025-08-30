@@ -31,42 +31,39 @@ async def update_category_blog(
     obj_in: schemas.CategoryProductUpdate
 
 ):
-    exist_name = crud.category_blog.get_by_name(db=db, name=obj_in.name)
-    if exist_name:
-        raise HTTPException(status_code=409, detail="this-name-already-Exist")
     crud.category_blog.update(db=db, obj_in=obj_in)
     return schemas.Msg(message=__(key="category-blogs-update-successfully"))
 
-@router.delete('/delete',response_model=schemas.Msg,status_code=200)
+
+@router.delete('/delete', response_model=schemas.Msg, status_code=200)
 async def delete_category_blog(
-     *,
+    *,
     db: Session = Depends(get_db),
     obj_in: schemas.CategoryBlogDelete
-    
+
 ):
-    crud.category_blog.delete(db=db,uuid=obj_in.uuid)
+    crud.category_blog.delete(db=db, uuid=obj_in.uuid)
     return schemas.Msg(message=__(key="category-blogs-deleted-successfully"))
 
-@router.put('/soft_delete',response_model=schemas.Msg,status_code=200)
+
+@router.put('/soft_delete', response_model=schemas.Msg, status_code=200)
 async def soft_delete_category_blog(
-     *,
+    *,
     db: Session = Depends(get_db),
     obj_in: schemas.CategoryBlogDelete
-    
+
 ):
-    crud.category_blog.soft_delete(db=db,uuid=obj_in.uuid)
+    crud.category_blog.soft_delete(db=db, uuid=obj_in.uuid)
     return schemas.Msg(message=__(key="categoryblogs-deleted-successfully"))
 
-@router.get('/get_by_uuid',response_model=schemas.CategoryBlogResponse,status_code=200)
 
+@router.get('/get_by_uuid', response_model=schemas.CategoryBlogResponse, status_code=200)
 async def get_category_blog_by_uuid(
-   *,
-   db:Session = Depends(get_db),
-   uuid:str
+    *,
+    db: Session = Depends(get_db),
+    uuid: str
 ):
-    obj_in = crud.category_blog_crud.get_by_uuid(db=db,uuid=uuid)
+    obj_in = crud.category_blog.get_by_uuid(db=db, uuid=uuid)
     if not obj_in:
-     raise HTTPException(status_code=404,detail="category-blog-not-found")
+        raise HTTPException(status_code=404, detail="category-blog-not-found")
     return obj_in
-
-  
